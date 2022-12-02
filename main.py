@@ -1,11 +1,9 @@
 import tkinter as tk
-import tkinter.messagebox
-import tkinter.messagebox as tkMessageBox
 import sqlite3
 
 principal = tk.Tk()
 principal.title("Notas de Alunos")
-principal.geometry("300x300")
+principal.geometry("300x400")
 
 def banco():
   global conexao, cursor
@@ -23,23 +21,34 @@ def cadastrar():
   cursor.execute("INSERT INTO notas (nome, bimestre1, bimestre2) values (?, ?, ?)", (str(nome_entrada.get()), float(bimestre1_entrada.get()), float(bimestre2_entrada.get())))
   conexao.commit()
   print("Dados cadastrados com sucesso!")
-    
+  conexao.close
+  nome_entrada.delete(0,"end")
+  bimestre1_entrada.delete(0,"end")
+  bimestre2_entrada.delete(0,"end")
 
-  
+def listar_console():
+  banco()
+  cursor.execute("SELECT * FROM notas")
+  alunos = cursor.fetchall()
+  for i in alunos:
+    print(i)
+
 nome_label = tk.Label(principal,text="Nome:")
 nome_label.place(x=50,y=50)
 nome_entrada = tk.Entry(principal)
-nome_entrada.place(x=100,y=50)
+nome_entrada.place(x=110,y=50)
 bimestre1_label = tk.Label(principal, text="Nota B1:")
 bimestre1_label.place(x=50,y=100)
 bimestre1_entrada = tk.Entry(principal)
-bimestre1_entrada.place(x=100,y=100)
-bimestre2_label = tk.Label(principal, text="NotaB2:")
+bimestre1_entrada.place(x=110,y=100)
+bimestre2_label = tk.Label(principal, text="Nota B2:")
 bimestre2_label.place(x=50,y=150)
 bimestre2_entrada = tk.Entry(principal)
-bimestre2_entrada.place(x=100,y=150)
+bimestre2_entrada.place(x=110,y=150)
 salvar_botao = tk.Button(text="Salvar", command=cadastrar)
-salvar_botao.place(x=100,y=200)
+salvar_botao.place(x=50,y=200)
+listar_botao = tk.Button(text="Listar no console", command=listar_console)
+listar_botao.place(x=130,y=200)
 cancelar_botao = tk.Button(text="Cancelar")
 cancelar_botao.place(x=200,y=200)
 
