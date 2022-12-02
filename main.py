@@ -3,7 +3,7 @@ import sqlite3
 
 principal = tk.Tk()
 principal.title("Notas de Alunos")
-principal.geometry("300x300")
+principal.geometry("300x400")
 
 def banco():
   global conexao, cursor
@@ -26,6 +26,13 @@ def cadastrar():
   bimestre1_entrada.delete(0,"end")
   bimestre2_entrada.delete(0,"end")
 
+def listar_console():
+  banco()
+  cursor.execute("SELECT * FROM notas")
+  alunos = cursor.fetchall()
+  for i in alunos:
+    print(i)
+
 nome_label = tk.Label(principal,text="Nome:")
 nome_label.place(x=50,y=50)
 nome_entrada = tk.Entry(principal)
@@ -39,7 +46,9 @@ bimestre2_label.place(x=50,y=150)
 bimestre2_entrada = tk.Entry(principal)
 bimestre2_entrada.place(x=110,y=150)
 salvar_botao = tk.Button(text="Salvar", command=cadastrar)
-salvar_botao.place(x=100,y=200)
+salvar_botao.place(x=50,y=200)
+listar_botao = tk.Button(text="Listar no console", command=listar_console)
+listar_botao.place(x=130,y=200)
 cancelar_botao = tk.Button(text="Cancelar")
 cancelar_botao.place(x=200,y=200)
 
