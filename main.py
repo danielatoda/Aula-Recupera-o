@@ -13,8 +13,12 @@ def banco():
   except:
     print("Erro ao conectar")
   else:
-    cursor.execute("CREATE TABLE IF NOT EXISTS `notas` (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nome TEXT, bimestre1 float, bimestre2 float)")
-    print("Tabela criada com sucesso!")
+    print("Conexão realizada com sucesso!")
+
+def criar_tabela():
+  banco()
+  cursor.execute("CREATE TABLE IF NOT EXISTS `notas` (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nome TEXT, bimestre1 float, bimestre2 float)")
+  print("Tabela criada com sucesso!")
 
 def cadastrar():
   banco()
@@ -44,6 +48,11 @@ def listar_interface():
     dados_label["text"] = dados_alunos #label recebendo a variável que contém as tuplas
   conexao.close()
 
+def cancelar():
+  nome_entrada.delete(0,"end")
+  bimestre1_entrada.delete(0,"end")
+  bimestre2_entrada.delete(0,"end")
+
 nome_label = tk.Label(principal,text="Nome:")
 nome_label.place(x=50,y=50)
 nome_entrada = tk.Entry(principal)
@@ -58,14 +67,16 @@ bimestre2_entrada = tk.Entry(principal)
 bimestre2_entrada.place(x=110,y=150)
 salvar_botao = tk.Button(text="Salvar", command=cadastrar)
 salvar_botao.place(x=50,y=200)
-cancelar_botao = tk.Button(text="Cancelar")
+cancelar_botao = tk.Button(text="Cancelar", command=cancelar)
 cancelar_botao.place(x=200,y=200)
 listar_botao = tk.Button(text="Listar dados no console", command=listar_console)
 listar_botao.place(x=50,y=250)
 listar_botao = tk.Button(text="Listar dados na interface", command=listar_interface)
 listar_botao.place(x=50,y=300)
+cabecalho_label = tk.Label(principal, text="Nome | 1º BIM | 2º BIM")
+cabecalho_label.place(x=50,y=350)
 dados_label = tk.Label(principal)
-dados_label.place(x=50,y=350)
+dados_label.place(x=50,y=370)
 
 
 tk.mainloop()
