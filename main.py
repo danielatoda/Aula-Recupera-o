@@ -35,11 +35,13 @@ def listar_console():
   conexao.close()
 
 def listar_interface():
+  dados_alunos = '' #variável para receber as tuplas do banco de dados
   banco()
   cursor.execute("SELECT nome, bimestre1, bimestre2 FROM notas")
   alunos = cursor.fetchall()
   for i in alunos:
-    dados_label["text"] = alunos
+    dados_alunos += str(i) + "\n" #concatenação das tuplas com uma quebra de linha
+    dados_label["text"] = dados_alunos #label recebendo a variável que contém as tuplas
   conexao.close()
 
 nome_label = tk.Label(principal,text="Nome:")
