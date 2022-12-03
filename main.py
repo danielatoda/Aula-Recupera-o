@@ -3,7 +3,7 @@ import sqlite3
 
 principal = tk.Tk()
 principal.title("Notas de Alunos")
-principal.geometry("300x400")
+principal.geometry("350x450")
 
 def banco():
   global conexao, cursor
@@ -28,10 +28,19 @@ def cadastrar():
 
 def listar_console():
   banco()
-  cursor.execute("SELECT * FROM notas")
+  cursor.execute("SELECT nome, bimestre1, bimestre2 FROM notas")
   alunos = cursor.fetchall()
   for i in alunos:
     print(i)
+  conexao.close()
+
+def listar_interface():
+  banco()
+  cursor.execute("SELECT nome, bimestre1, bimestre2 FROM notas")
+  alunos = cursor.fetchall()
+  for i in alunos:
+    dados_label["text"] = alunos
+  conexao.close()
 
 nome_label = tk.Label(principal,text="Nome:")
 nome_label.place(x=50,y=50)
@@ -47,9 +56,14 @@ bimestre2_entrada = tk.Entry(principal)
 bimestre2_entrada.place(x=110,y=150)
 salvar_botao = tk.Button(text="Salvar", command=cadastrar)
 salvar_botao.place(x=50,y=200)
-listar_botao = tk.Button(text="Listar no console", command=listar_console)
-listar_botao.place(x=130,y=200)
 cancelar_botao = tk.Button(text="Cancelar")
 cancelar_botao.place(x=200,y=200)
+listar_botao = tk.Button(text="Listar dados no console", command=listar_console)
+listar_botao.place(x=50,y=250)
+listar_botao = tk.Button(text="Listar dados na interface", command=listar_interface)
+listar_botao.place(x=50,y=300)
+dados_label = tk.Label(principal)
+dados_label.place(x=50,y=350)
+
 
 tk.mainloop()
