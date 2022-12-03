@@ -2,6 +2,7 @@
 
 Exemplo de resolução da <b>Atividade de aprendizagem</b> realizada na aula de recuperação de Linguagem de Programação - 2022/2.
 
+<b>ATENÇÃO!</b> A atividade foi pensada para ser desenvolvida em duas aulas de 50 minutos. Logo, não foram incluídas mensagens ao usuário e tratamento de exceções, apesar de essenciais na boa prática de desenvolvimento.
 
 <br>
 <b>ITEM/PROBLEMA</b> que o código visa solucionar
@@ -19,4 +20,4 @@ Exemplo de resolução da <b>Atividade de aprendizagem</b> realizada na aula de 
     <li>após a criação do programa, você percebeu que faltou a tela de visualização dos dados inseridos.
     Faça as alterações necessárias para que a sua vizinha consiga visualizar na interface as notas que foram inseridas.</li>
    </ol>
- </ol>  
+ </ol>
